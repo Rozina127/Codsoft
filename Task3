@@ -1,0 +1,127 @@
+//codsoft
+#include <iostream>
+using namespace std;
+// game tictactoe  class 
+class TicTacToe
+{
+    char board[3][3];  //2D array to initialize the board of 3*3
+    char current_player;
+
+public:
+    //initialize game board with empty spaces 
+    TicTacToe() : current_player('X')
+    {
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                board[i][j] = ' ';
+    }
+    //functions
+    void display_Board();
+    bool update_Board(int row, int col);
+    bool check_Win();
+    bool check_Draw();
+    void switch_Player();
+    char getCurrent_Player();
+};
+//function to dispaly the current state of the game board 
+void TicTacToe::display_Board()
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        for (int j = 0; j < 3; ++j)
+        {
+            cout << board[i][j];
+           if (j < 2)
+                cout << "|";
+        }
+        cout << endl;
+        if (i < 2)
+            cout <<"-----\n";
+    }
+}
+//function to update the game board according to players move 
+ bool TicTacToe::update_Board(int row, int col)
+{
+    if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ')
+    {
+        board[row][col] = current_player;
+        return true;
+    }
+    return false;
+}
+ //function which check which player win 
+ bool TicTacToe::check_Win()
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (board[i][0] == current_player && board[i][1] == current_player && board[i][2] == current_player)
+        return true;
+        if (board[0][i] == current_player && board[1][i] == current_player && board[2][i] == current_player)
+        return true;
+    }
+    if (board[0][0] == current_player && board[1][1] == current_player && board[2][2] == current_player)
+    return true;
+    if (board[0][2] == current_player && board[1][1] == current_player && board[2][0] == current_player)
+    return true;
+    return false;
+}
+ //function to get the current player X or O 
+char TicTacToe::getCurrent_Player()
+ {
+     return current_player;
+ }
+//function to switch the current player 
+ void TicTacToe::switch_Player() 
+{
+    current_player = (current_player == 'X') ? 'O' : 'X';
+}
+ //function which check if the game draw
+bool TicTacToe::check_Draw()
+ {
+     for (int i = 0; i < 3; ++i) {
+         for (int j = 0; j < 3; ++j)
+         {
+             if (board[i][j] == ' ')
+                 return false;
+         }
+     }
+     return true;
+ }
+int main() 
+{
+    TicTacToe game;
+    int row, col;
+    cout << " Welcome to TicTacToe GAME" << endl<< endl;
+    while (true)
+    {
+        game.display_Board();
+        cout << "Player " << game.getCurrent_Player() << ", enter your move (row and column): ";
+        cin >> row >> col;
+        if (game.update_Board(row, col))
+        {
+            if (game.check_Win()) {
+                game.display_Board();
+                cout << "Player " << game.getCurrent_Player() << " wins!"<<endl;
+                break;
+            }
+            else if (game.check_Draw()) {
+                game.display_Board();
+                cout << "The game is a draw.\n";
+                break;
+            }
+            game.switch_Player();
+        }
+        else
+        {
+            cout << "Invalid move, try again." << endl;
+        }
+    }
+    char play_again;
+    cout << "Do you want to play again? (Y/N): ";
+    cin >> play_again;
+    if (play_again == 'Y' || play_again == 'y')
+    {
+        main();
+    }
+    return 0;
+}
