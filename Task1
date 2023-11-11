@@ -1,0 +1,32 @@
+// codsoft
+#include <iostream>
+#include <cstdlib>    // ramdon number library
+#include <ctime>     //ramdom number generator library according to time 
+using namespace std;
+int main()
+{
+    srand(time(0));
+    // generate ramdom number 
+    int number_to_guess = rand() % 100 + 1;
+    int guess;   // variable 
+
+    cout << "Guess a number between 1 and 100: "; 
+    while (cin >> guess)  //user enter number 
+    {
+        if (guess < number_to_guess)
+        {
+            cout << "You guess too low number!" << endl;
+        }
+        else if (guess > number_to_guess)
+        {
+            cout << "You guess too high number!" << endl;
+        }
+        else
+        {
+            cout << "Congratulations! You guessed the number." << endl;
+            break;
+        }
+        cout << "Guess again: ";
+    }
+    return 0;
+}
