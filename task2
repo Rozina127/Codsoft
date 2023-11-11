@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    double number1, number2;
+    char operation;
+    //prompt user to enter inputs
+    cout << "Enter first number: ";
+    cin >> number1;
+    cout << "Enter second number: ";
+    cin >> number2;
+    //prompt user to enter opeeration (addition,subtraction,multiplication or division)
+    cout << "Enter an operator (+, -, *, /): ";
+    cin >> operation;
+    //calculation based on selected operation
+    switch (operation)
+    {
+    //addition
+    case '+':
+        cout << "Result: " << number1 + number2 <<endl;
+        break;
+    //subtraction
+    case '-':
+        cout << "Result: " << number1 - number2 <<endl;
+        break;
+    //multiplication
+    case '*':
+        cout << "Result: " << number1 * number2 << endl;
+        break;
+    //division
+    case '/':
+        if (number2 != 0)
+            cout << "Result: " << number1 / number2 << endl;
+        else
+        cout << "Infinity Error! Division by zero is not allowed."<<endl;
+        break;
+    //when invalid operation is selected by user 
+    default:
+        cout << "Error! Invalid operator."<<endl;
+        break;
+    }
+    return 0;
+}
